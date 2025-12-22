@@ -1,11 +1,13 @@
-import Button from '@mui/material/Button';
+import { Header } from './Components/Header.jsx';
+import { Shop } from './Components/Shop.jsx';
+import { Footer } from './Components/Footer.jsx';
 
 function App() {
   return (
     <>
-      <div>
-        <Button variant="contained">Hello world</Button>
-      </div>
+      <Header />
+      <Shop />
+      <Footer />
     </>
   );
 }
