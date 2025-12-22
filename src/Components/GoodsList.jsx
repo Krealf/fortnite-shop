@@ -2,8 +2,7 @@ import {GoodsItem} from "./GoodsItem.jsx";
 import Grid from "@mui/material/Grid";
 
 export function GoodsList(props) {
-  const {good = []} = props;
-  console.log(good)
+  const {good = [], cbAddToCart} = props;
 
   return (
     <Grid
@@ -15,7 +14,9 @@ export function GoodsList(props) {
     >
       {
         good.map(item => (
-          <GoodsItem key={item.offerId} {...item} />
+          <GoodsItem
+            key={item.offerId}
+            cbAddToCard={() => cbAddToCart(item)} {...item} />
         ))
       }
     </Grid>

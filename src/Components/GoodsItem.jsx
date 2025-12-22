@@ -13,9 +13,9 @@ export function GoodsItem(props) {
 
   const {
     finalPrice,
-    offerId,
     brItems = [],
     tracks = [],
+    cbAddToCard = null,
   } = props;
 
   if (brItems.length > 0) {
@@ -63,6 +63,7 @@ export function GoodsItem(props) {
           sx={{color: "white", backgroundColor: "green"}}
           variant="contained"
           startIcon={<AddShoppingCartIcon />}
+          onClick={cbAddToCard}
         >Add to cart</Button>
       </CardActions>
     </Card>
