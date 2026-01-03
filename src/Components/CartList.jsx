@@ -4,7 +4,12 @@ import Typography from "@mui/material/Typography";
 import {CartItem} from "./CartItem.jsx";
 
 function CartList(props) {
-  const {order, cbRemoveFromCart = Function.prototype} = props
+  const {
+    order,
+    cbRemoveFromCart = Function.prototype,
+    cbincreaseQuantity = Function.prototype,
+    cbdecreaseQuantity = Function.prototype
+  } = props
 
   const totalPrice = order.reduce((sum, el) => {
     return sum + el.finalPrice * el.quantity
@@ -23,7 +28,12 @@ function CartList(props) {
       </Typography>
 
       {order.length ? order.map(item => (
-        <CartItem key={item.offerId} {...item} cbRemoveFromCart={cbRemoveFromCart}/>)) : <Typography>Здесь пока пусто</Typography>
+        <CartItem
+          key={item.offerId} {...item}
+          cbRemoveFromCart={cbRemoveFromCart}
+          cbincreaseQuantity={cbincreaseQuantity}
+          cbdecreaseQuantity={cbdecreaseQuantity}
+        />)) : <Typography>Здесь пока пусто</Typography>
       }
 
       <Typography

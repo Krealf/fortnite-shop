@@ -63,6 +63,38 @@ function Shop() {
     setCartShow(!isCartShow);
   }
 
+  const increaseQuantity = (itemId) => {
+    const itemIndex = order.findIndex(orderItem => orderItem.offerId === itemId)
+
+    const newOrder = order.map((orderItem, index) => {
+      if (index === itemIndex) {
+        return {
+          ...orderItem, quantity: orderItem.quantity + 1,
+        }
+      } else {
+        return orderItem;
+      }
+    })
+
+    setOrder(newOrder)
+  }
+
+  const decreaseQuantity = (itemId) => {
+    const itemIndex = order.findIndex(orderItem => orderItem.offerId === itemId)
+
+    const newOrder = order.map((orderItem, index) => {
+      if (index === itemIndex && orderItem.quantity - 1 > 0) {
+        return {
+          ...orderItem, quantity: orderItem.quantity - 1,
+        }
+      } else {
+        return orderItem;
+      }
+    })
+
+    setOrder(newOrder)
+  }
+
   return (<Container
     component="main"
     sx={{p: 3}}
@@ -75,7 +107,12 @@ function Shop() {
       open={isCartShow}
       onClose={() => setCartShow(false)}
     >
-      <CartList order={order} cbRemoveFromCart={removeFromCart}/>
+      <CartList
+        order={order}
+        cbRemoveFromCart={removeFromCart}
+        cbincreaseQuantity={increaseQuantity}
+        cbdecreaseQuantity={decreaseQuantity}
+      />
     </Drawer>
 
     <Cart

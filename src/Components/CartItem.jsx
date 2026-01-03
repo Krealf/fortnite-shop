@@ -1,7 +1,8 @@
 import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
 import IconButton from '@mui/material/IconButton';
-import ClearIcon from '@mui/icons-material/Clear';
+import DeleteIcon from '@mui/icons-material/Delete';
+import RemoveIcon from '@mui/icons-material/Remove';
+import AddIcon from '@mui/icons-material/Add';
 
 function CartItem(props) {
   let nameTitle = "Other"
@@ -12,7 +13,9 @@ function CartItem(props) {
     tracks = [],
     quantity = 1,
     cbRemoveFromCart = Function.prototype,
-    offerId
+    offerId,
+    cbincreaseQuantity = Function.prototype,
+    cbdecreaseQuantity = Function.prototype,
   } = props;
 
   if (brItems.length > 0) {
@@ -22,19 +25,30 @@ function CartItem(props) {
   }
 
   return (<ListItem
-    secondaryAction={
-      <IconButton
-        edge="end"
-        aria-label="delete"
-        onClick={() => cbRemoveFromCart(offerId)}
-      >
-        <ClearIcon />
-      </IconButton>
-    }
+    secondaryAction={<IconButton
+      edge="end"
+      aria-label="delete"
+      onClick={() => cbRemoveFromCart(offerId)}
+    >
+      <DeleteIcon />
+    </IconButton>}
   >
-    <ListItemText
-      primary={nameTitle + " x " + quantity + " = " + quantity * finalPrice}
-    />
+    {nameTitle}, {finalPrice * quantity} V-bucks
+
+    <IconButton
+      aria-label="minus"
+      onClick={() => cbdecreaseQuantity(offerId)}
+    >
+      <RemoveIcon />
+    </IconButton>
+    {quantity}
+    <IconButton
+      aria-label="plus"
+      onClick={() => cbincreaseQuantity(offerId)}
+    >
+      <AddIcon />
+    </IconButton>
+
   </ListItem>)
 }
 
