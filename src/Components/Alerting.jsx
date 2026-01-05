@@ -1,17 +1,19 @@
 import Alert from '@mui/material/Alert';
 import CheckIcon from '@mui/icons-material/Check';
 import { useEffect } from 'react';
+import {useContext} from "react";
+import {ShopContext} from "../context.jsx";
 
-function Alerting(props) {
-  const { name = '', closeAlert = Function.prototype } = props;
+function Alerting() {
+  const {alertName, closeAlert} = useContext(ShopContext)
 
   useEffect(() => {
-    const timerId = setTimeout(closeAlert, 3000);
+    const timerId = setTimeout(() => closeAlert(), 3000);
 
     return () => {
       clearTimeout(timerId);
     };
-  }, [name]);
+  }, [alertName]);
 
   return (
     <Alert
@@ -24,7 +26,7 @@ function Alerting(props) {
         zIndex: 1000,
       }}
     >
-      {name} добавлен в корзину!
+      {alertName} добавлен в корзину!
     </Alert>
   );
 }

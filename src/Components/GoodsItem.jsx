@@ -6,13 +6,18 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
+import {useContext} from "react";
+import {ShopContext} from "../context.jsx";
+
 export function GoodsItem(props) {
+  const {addToCart} = useContext(ShopContext)
+
   let nameTitle = 'Other';
   let description = 'Other';
   let srcImage =
     'https://fortnite-api.com/images/cosmetics/br/shoes_clinicraisebarge/icon.png';
 
-  const { finalPrice, brItems = [], tracks = [], cbAddToCard = null } = props;
+  const { finalPrice, brItems = [], tracks = []} = props;
 
   if (brItems.length > 0) {
     nameTitle = brItems[0].name;
@@ -43,7 +48,7 @@ export function GoodsItem(props) {
           sx={{ color: 'white', backgroundColor: 'green' }}
           variant="contained"
           startIcon={<AddShoppingCartIcon />}
-          onClick={cbAddToCard}
+          onClick={() => addToCart({item: props, name: nameTitle})}
         >
           Add to cart
         </Button>

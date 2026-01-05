@@ -3,8 +3,11 @@ import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
 import { Box } from '@mui/material';
 
-function Cart(props) {
-  const { quantity = 0, handleCartShow = Function.prototype } = props;
+import {useContext} from "react";
+import {ShopContext} from "../context.jsx";
+
+function Cart() {
+  const {handleCartShow, order} = useContext(ShopContext)
 
   return (
     <Box
@@ -16,10 +19,10 @@ function Cart(props) {
         backgroundColor: 'green',
         borderRadius: '50%',
       }}
-      onClick={handleCartShow}
+      onClick={() => handleCartShow()}
     >
       <IconButton size="large">
-        <Badge badgeContent={quantity} color="primary">
+        <Badge badgeContent={order.length} color="primary">
           <ShoppingCartIcon sx={{ fontSize: 32, color: 'white' }} />
         </Badge>
       </IconButton>

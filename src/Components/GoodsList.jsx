@@ -1,8 +1,11 @@
 import { GoodsItem } from './GoodsItem.jsx';
 import Grid from '@mui/material/Grid';
 
-export function GoodsList(props) {
-  const { good = [], cbAddToCart } = props;
+import {useContext} from "react";
+import {ShopContext} from "../context.jsx";
+
+export function GoodsList() {
+  const {goods = []} = useContext(ShopContext)
 
   return (
     <Grid
@@ -12,10 +15,9 @@ export function GoodsList(props) {
       display="grid"
       gridTemplateColumns="repeat(auto-fill, minmax(250px, 1fr))"
     >
-      {good.map((item) => (
+      {goods.map((item) => (
         <GoodsItem
           key={item.offerId}
-          cbAddToCard={() => cbAddToCart(item)}
           {...item}
         />
       ))}
