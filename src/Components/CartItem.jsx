@@ -3,8 +3,16 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
+import {useContext} from "react";
+import {ShopContext} from "../context.jsx";
 
 function CartItem(props) {
+  const {
+    removeFromCart,
+    increaseQuantity,
+    decreaseQuantity
+  } = useContext(ShopContext)
+
   let nameTitle = 'Other';
 
   const {
@@ -12,10 +20,7 @@ function CartItem(props) {
     brItems = [],
     tracks = [],
     quantity = 1,
-    cbRemoveFromCart = Function.prototype,
     offerId,
-    cbincreaseQuantity = Function.prototype,
-    cbdecreaseQuantity = Function.prototype,
   } = props;
 
   if (brItems.length > 0) {
@@ -30,7 +35,7 @@ function CartItem(props) {
         <IconButton
           edge="end"
           aria-label="delete"
-          onClick={() => cbRemoveFromCart(offerId)}
+          onClick={() => removeFromCart(offerId)}
         >
           <DeleteIcon />
         </IconButton>
@@ -39,16 +44,19 @@ function CartItem(props) {
       {nameTitle}, {finalPrice * quantity} V-bucks
       <IconButton
         aria-label="minus"
-        onClick={() => cbdecreaseQuantity(offerId)}
+        onClick={() => decreaseQuantity(offerId)}
       >
         <RemoveIcon />
       </IconButton>
       {quantity}
-      <IconButton aria-label="plus" onClick={() => cbincreaseQuantity(offerId)}>
+      <IconButton
+        aria-label="plus"
+        onClick={() => increaseQuantity(offerId)}
+      >
         <AddIcon />
       </IconButton>
     </ListItem>
   );
 }
 
-export { CartItem };
+export {CartItem};

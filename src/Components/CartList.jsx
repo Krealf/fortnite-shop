@@ -3,13 +3,11 @@ import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { CartItem } from './CartItem.jsx';
 
-function CartList(props) {
-  const {
-    order,
-    cbRemoveFromCart = Function.prototype,
-    cbincreaseQuantity = Function.prototype,
-    cbdecreaseQuantity = Function.prototype,
-  } = props;
+import {useContext} from "react";
+import {ShopContext} from "../context.jsx";
+
+function CartList() {
+  const {order} = useContext(ShopContext)
 
   const totalPrice = order.reduce((sum, el) => {
     return sum + el.finalPrice * el.quantity;
@@ -32,9 +30,6 @@ function CartList(props) {
           <CartItem
             key={item.offerId}
             {...item}
-            cbRemoveFromCart={cbRemoveFromCart}
-            cbincreaseQuantity={cbincreaseQuantity}
-            cbdecreaseQuantity={cbdecreaseQuantity}
           />
         ))
       ) : (
